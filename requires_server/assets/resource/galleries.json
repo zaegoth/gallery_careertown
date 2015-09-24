@@ -1,0 +1,14 @@
+[
+    {
+        "alias" : "nature",
+        "title" : "Nature",
+        "front" : "image_1.jpeg",
+        "storage" : 1
+    },
+    {
+        "alias" : "cities",
+        "title" : "Cities",
+        "front" : "http://f.fastcompany.net/multisite_files/coexist/imagecache/1280/poster/2012/11/1680856-poster-1280-10-smartest-european-cities-shutterstock-78340003-1.jpg",
+        "storage" : 0
+    }
+]

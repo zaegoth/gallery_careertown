@@ -1,0 +1,16 @@
+[
+    {
+        "title" : "Sunset city",
+        "description" : "Sunset... or rise over some city. Is that lake Michigan, Chicago?",
+        "storage" : 0,
+        "source" : "http://f.fastcompany.net/multisite_files/coexist/imagecache/1280/poster/2012/11/1680856-poster-1280-10-smartest-european-cities-shutterstock-78340003-1.jpg",
+        "tags" : ["city", "lake", "chicago", "sunset"]
+    },
+    {
+        "title" : "Timelapse city",
+        "description" : "You think this is timelapse? Guess again... *cough* Flash *cough*",
+        "storage" : 0,
+        "source" : "http://images7.alphacoders.com/307/307349.jpg",
+        "tags" : ["city", "timelapse", "flash"]
+    }
+]

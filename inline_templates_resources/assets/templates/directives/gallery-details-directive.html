@@ -1,0 +1,20 @@
+<div class="columns details">
+    <div ng-repeat="img in images" class="thumb" ng-click="setCurrent(img, true)">
+        <div class="img-details-title">
+            {{img.title}}
+        </div>
+        <ul class="img-details-list">
+            <li><strong>Filename:</strong> 
+                <a ng-href="{{(img.storage ? imgPath + img.source : img.source)}}" target="_blank">
+                    {{img.source}}
+                </a>
+            </li>
+            <li>
+                <strong> Description:   </strong> {{img.description}}
+            </li>
+            <li>
+                <a ng-href="#/gallery/{{gallery}}/view/{{tag}}" ng-repeat="tag in img.tags" class="tag label label-primary">{{tag}}</a>
+            </li>
+        </ul> 
+    </div>
+</div>

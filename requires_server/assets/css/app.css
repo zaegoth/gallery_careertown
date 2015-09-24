@@ -1,0 +1,128 @@
+body {
+    padding-top: 70px;
+    color: #919191;
+}
+
+.img-thumbnail {
+    -webkit-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+   
+}
+
+.img-caption {
+    
+    font-size: 11px;
+    padding:5px;
+    cursor:pointer;
+    border-top:0px;
+}
+
+.img-num {
+    font-size:11px;
+    line-height:32px;
+}
+
+.img-caption-overlay {
+    background: #ffffff;
+    background: rgba(255, 255, 255, 0.5);
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    padding:15px;
+    color:#222222;
+}
+
+.img-cont-large {
+    position:relative;
+}
+
+.tag {
+    margin:0 3px;
+}
+
+.columns {
+    margin-top:10px;
+    -webkit-column-width: 300px;
+    -webkit-column-gap: 10px;
+    -webkit-column-fill: auto;
+    -moz-column--width: 300px;
+    -moz-column-gap: 10px;
+    -moz-column-fill: auto;
+    column-width: 300px;
+    column-gap: 15px;
+    column-fill: auto;
+}
+
+.columns .thumb {
+    width:100%;
+    display: inline-block;
+    background: #FEFEFE;
+    border: 2px solid #FAFAFA;
+    box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+    margin: 0 2px 15px;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
+    padding: 15px;
+    padding-bottom: 5px;
+    background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
+    opacity: 1;
+    cursor:pointer;
+}
+
+
+
+.columns .thumb img {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+}
+
+.details .thumb {
+    cursor: default;
+}
+
+.modal-content {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+.btn-prev, .btn-next {
+    position: absolute;
+    top:40%;
+    height:60px;
+    width:60px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    border:0;
+}
+
+.btn-prev {
+    left:-90px;
+}
+
+.btn-next {
+    right:-90px;
+}
+
+.details {
+    font-size:12px;
+}
+
+.img-details-title {
+    font-size:13px;
+    padding-bottom:2px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom:15px;
+}
+
+ul.img-details-list {
+    list-style: none;
+    padding:0 15px;
+}
+
+ul.img-details-list li {
+    margin: 5px 0;
+}

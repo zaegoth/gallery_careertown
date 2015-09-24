@@ -1,0 +1,38 @@
+<div class="columns">
+    <div ng-repeat="img in images" class="thumb" ng-click="setCurrent(img, true)">
+        <img class="img-responsive" ng-src="{{(img.storage ? imgPath + img.source : img.source)}}">
+        <div class="img-caption">
+            {{img.title}}
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4 col-md-offset-4" ng-if="currentTag">
+    <a class="btn btn-block btn-primary" ng-href="#/gallery/{{gallery}}/view/">Show All</a>
+</div>
+
+
+<script id="viewModal.html" type="text/ng-template">
+    <div class="modal-header">
+        <h3 class="modal-title">{{currentImage.title}}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="img-cont-large">
+            <img class="img-responsive img-thumbnail" ng-src="{{(currentImage.storage ? imgPath + currentImage.source : currentImage.source)}}">
+            <div class="img-caption-overlay">
+                {{currentImage.description}}
+            </div>
+        </div>
+        <div class="img-tags">
+            <h4 class="page-header">Tags</h4>
+            <a ng-href="#/gallery/{{gallery}}/view/{{tag}}" ng-repeat="tag in currentImage.tags" class="tag label label-primary">{{tag}}</a>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="text-center img-num">
+            Image: {{currentImage.id + 1}} out of {{images.length}}
+        </div>
+    </div>
+    <button class="btn-prev" type="button" ng-if="currentImage.id - 1 >= 0" ng-click="setCurrent(images[currentImage.id - 1])"><i class="fa fa-2x fa-angle-left"></i></button>
+    <button class="btn-next" type="button" ng-if="currentImage.id + 1 < images.length" ng-click="setCurrent(images[currentImage.id + 1])"><i class="fa fa-2x fa-angle-right"></i></button>
+</script>

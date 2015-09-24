@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html ng-app="galleryApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
+    <link href="assets/css/app.css" rel="stylesheet">
+  </head>
+  <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Gallery</a>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <gallery-list></gallery-list>
+            <div ui-view></div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="assets/js/lib/ui-bootstrap-tpls-0.13.4.min.js"></script>
+        <script src="assets/js/app.js"></script>
+        <script src="assets/js/services/resource.js"></script>
+        <script src="assets/js/controllers/main.js"></script>
+        <script src="assets/js/directives/main.js"></script>
+        
+        <script id="assets/templates/gallery-view.html" type="text/ng-template">
+            <gallery-view gallery="gallery" current-tag="tag"></gallery-view>
+        </script>
+        
+        <script id="assets/templates/gallery-tabs.html" type="text/ng-template">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="{{(state == 'gallery.view') ? 'active' : ''}}"><a ui-sref="gallery.view">View</a></li>
+                <li class="{{(state == 'gallery.details') ? 'active' : ''}}"><a ui-sref="gallery.details">Details</a></li>
+            </ul>
+
+            <div ui-view></div>
+        </script>
+        
+        <script id="assets/templates/gallery-details.html" type="text/ng-template">
+            <gallery-details gallery="gallery"></gallery-details>
+        </script>
+        
+        <script id="assets/templates/directives/gallery-view-directive.html" type="text/ng-template">
+            <div class="columns">
+                <div ng-repeat="img in images" class="thumb" ng-click="setCurrent(img, true)">
+                    <img class="img-responsive" ng-src="{{(img.storage ? imgPath + img.source : img.source)}}">
+                    <div class="img-caption">
+                        {{img.title}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-md-offset-4" ng-if="currentTag">
+                <a class="btn btn-block btn-primary" ng-href="#/gallery/{{gallery}}/view/">Show All</a>
+            </div>
+        </script>
+        
+        <script id="viewModal.html" type="text/ng-template">
+            <div class="modal-header">
+                <h3 class="modal-title">{{currentImage.title}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="img-cont-large">
+                    <img class="img-responsive img-thumbnail" ng-src="{{(currentImage.storage ? imgPath + currentImage.source : currentImage.source)}}">
+                    <div class="img-caption-overlay">
+                        {{currentImage.description}}
+                    </div>
+                </div>
+                <div class="img-tags">
+                    <h4 class="page-header">Tags</h4>
+                    <a ng-href="#/gallery/{{gallery}}/view/{{tag}}" ng-repeat="tag in currentImage.tags" class="tag label label-primary">{{tag}}</a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center img-num">
+                    Image: {{currentImage.id + 1}} out of {{images.length}}
+                </div>
+            </div>
+            <button class="btn-prev" type="button" ng-if="currentImage.id - 1 >= 0" ng-click="setCurrent(images[currentImage.id - 1])"><i class="fa fa-2x fa-angle-left"></i></button>
+            <button class="btn-next" type="button" ng-if="currentImage.id + 1 < images.length" ng-click="setCurrent(images[currentImage.id + 1])"><i class="fa fa-2x fa-angle-right"></i></button>
+        </script>
+        
+        <script id="assets/templates/directives/gallery-list-directive.html" type="text/ng-template">
+            <h4 class="page-header">Select Gallery
+                <button class="pull-right btn btn-sm btn-{{(showSelection) ? 'warning' : 'primary'}}" ng-click="toggleSelection()">{{(showSelection) ? 'Hide' : 'Show'}}</button>
+                <span class="clearfix"></span>
+            </h4>
+            <div class="columns" ng-show="showSelection">
+                <a ng-repeat="gallery in galleries" class="thumb" ng-href="#/gallery/{{gallery.alias}}/view/" ng-click="toggleSelection()">
+                    <img class="img-responsive" ng-src="{{(gallery.storage ? ('assets/images/' + gallery.alias + '/' + gallery.front) : gallery.front)}}">
+                    <div class="img-caption">
+                        {{gallery.title}}
+                    </div>
+                </a>
+            </div>
+        </script>
+        
+        <script id="assets/templates/directives/gallery-details-directive.html" type="text/ng-template">
+            <div class="columns details">
+                <div ng-repeat="img in images" class="thumb" ng-click="setCurrent(img, true)">
+                    <div class="img-details-title">
+                        {{img.title}}
+                    </div>
+                    <ul class="img-details-list">
+                        <li><strong>Filename:</strong> 
+                            <a ng-href="{{(img.storage ? imgPath + img.source : img.source)}}" target="_blank">
+                                {{img.source}}
+                            </a>
+                        </li>
+                        <li>
+                            <strong> Description:   </strong> {{img.description}}
+                        </li>
+                        <li>
+                            <a ng-href="#/gallery/{{gallery}}/view/{{tag}}" ng-repeat="tag in img.tags" class="tag label label-primary">{{tag}}</a>
+                        </li>
+                    </ul> 
+                </div>
+            </div>
+        </script>
+  </body>
+</html>

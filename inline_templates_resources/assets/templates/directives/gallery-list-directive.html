@@ -1,0 +1,12 @@
+<h4 class="page-header">Select Gallery
+    <button class="pull-right btn btn-sm btn-{{(showSelection) ? 'warning' : 'primary'}}" ng-click="toggleSelection()">{{(showSelection) ? 'Hide' : 'Show'}}</button>
+    <span class="clearfix"></span>
+</h4>
+<div class="columns" ng-show="showSelection">
+    <a ng-repeat="gallery in galleries" class="thumb" ng-href="#/gallery/{{gallery.alias}}/view/" ng-click="toggleSelection()">
+        <img class="img-responsive" ng-src="{{(gallery.storage ? ('assets/images/' + gallery.alias + '/' + gallery.front) : gallery.front)}}">
+        <div class="img-caption">
+            {{gallery.title}}
+        </div>
+    </a>
+</div>
